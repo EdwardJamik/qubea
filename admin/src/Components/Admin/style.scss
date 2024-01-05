@@ -1,0 +1,8 @@
+.admin_container{
+  padding: 10px 15px;
+  flex: 4;
+  width: 100%;
+  @media screen and (max-width: 991px) {
+    overflow: auto;
+  }
+}

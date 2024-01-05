@@ -1,0 +1,230 @@
+.sidebar {
+    flex: 1;
+    height: calc(100vh - 50px);
+    background-color: rgb(251, 251, 255);
+    position: sticky;
+    top: 50px;
+    z-index: 9;
+    & .sidebarWrapper {
+        padding: 0px !important;
+        color: #555;
+    }
+}
+
+.sidebarMenu {
+    margin-bottom: 10px;
+}
+
+.sidebarTitle {
+    font-size: 13px;
+    color: rgb(187, 186, 186);
+}
+
+.sidebarList {
+    list-style: none;
+    padding: 5px;
+}
+
+.sidebarListItem {
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.sidebarListItem.active,
+.sidebarListItem:hover {
+    background-color: rgb(240, 240, 255);
+}
+
+.sidebarIcon{
+    margin-right: 5px;
+    font-size: 20px !important;
+}
+
+
+
+.side-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    text-align: left;
+    color: #000;
+    z-index: 999;
+    overflow-y: auto;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    flex: 1 1;
+    height: calc(100vh - 50px);
+    background-color: rgb(251, 251, 255);
+    position: sticky;
+    top: 50px;
+}
+
+.side-navbar .scrolled-wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+.side-navbar.hide {
+    left: -70px;
+}
+
+.side-navbar a.brand-small {
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 0;
+}
+
+.side-navbar a.brand-small:hover, .side-navbar a.brand-small:focus {
+    background: none;
+}
+
+.side-navbar a.brand-small strong {
+    font-size: 1.5rem;
+}
+
+.side-navbar li {
+    position: relative;
+    display: block;
+}
+
+.side-navbar li a {
+    position: relative;
+    font-size: .9rem;
+    font-weight: 300;
+    color: #fff;
+    text-decoration: none;
+    width: 100%;
+    padding: 12px;
+}
+
+.side-navbar li a:focus, .side-navbar li a:hover, .side-navbar li a[aria-expanded="true"] {
+    background: #33b35a;
+    color: #fff;
+    text-decoration: none;
+}
+
+.side-navbar li a[data-toggle="collapse"]::before {
+    content: '\f104';
+    display: inline-block;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    font-family: 'FontAwesome';
+    position: absolute;
+    top: 50%;
+    right: 20px;
+}
+
+.side-navbar li a[aria-expanded="true"]::before {
+    content: '\f107';
+    color: #fff;
+}
+
+.side-navbar li.active > a {
+    background: #33b35a;
+}
+
+.side-navbar li li.active > a {
+    background: #2d9f50 !important;
+}
+
+
+.side-navbar .sidenav-header {
+    background: #292929;
+    padding: 14px;
+    margin-bottom: 10px;
+}
+
+.side-navbar .sidenav-header span {
+    font-size: 0.8em;
+    color: #666;
+}
+
+.side-navbar .sidenav-header h2 {
+    margin: 10px 0 0;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+}
+
+.side-navbar .sidenav-heading {
+    font-weight: 700;
+    color: #adb5bd;
+    font-size: .9rem;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+.side-navbar span {
+    display: inline-block;
+}
+
+.side-navbar i {
+    font-size: inherit;
+    margin-right: 10px;
+}
+
+.mobile-version-navbar{
+    outline: none !important;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.mobile-version-navbar-show{
+    margin-left:200px;
+}
+
+.count_badge{
+    position: absolute;
+    top: 0;
+}
+
+
+/* SIDE NAVBAR MEDIAQUERIES ------------------------------ */
+@media (max-width: 991px) {
+    .sidebar{
+        position: fixed !important;
+        flex: none !important;
+    }
+    .page {
+        width: 100%;
+    }
+    .page.active {
+        width: 100%;
+    }
+    .page.active-sm {
+        width: calc(100% - 70px);
+    }
+    .side-navbar {
+        /*     left: -120px; */
+        /*display: none !important;*/
+        position: fixed!important;
+        left: -1000px!important;
+        width: 0px;
+        text-align: center;
+        opacity:0;
+        padding: 25px!important;
+    }
+    .side-navbar.show-sm {
+        /*display: block !important;*/
+        left: 0 !important;
+        width: 100%!important;
+        position: fixed !important;
+        opacity:1 ;
+    }
+    .side-navbar .sidenav-heading {
+        margin-left: 0;
+        font-size: .8rem;
+    }
+    .side-navbar i {
+        display: block;
+        margin-right: 0;
+        font-size: 1rem;
+    }
+
+}
