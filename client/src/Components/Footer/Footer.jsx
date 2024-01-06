@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 
 import './footer.scss'
-import {Link, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import axios from "axios";
 import {url} from "../../Config.js";
 

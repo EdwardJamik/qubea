@@ -1,10 +1,7 @@
 import './App.scss'
-import {lazy, Suspense, useState} from "react";
-import {Route, Routes, useNavigate, useParams} from "react-router-dom";
+import {Suspense} from "react";
+import {Route, Routes} from "react-router-dom";
 import {ProtectedRoute} from "./ProtectedRoute";
-import Header from "./Components/header/Header.jsx";
-import Main from "./Components/Main/Main.jsx";
-import Footer from "./Components/Footer/Footer.jsx";
 
 import Login from "./Components/Login/Login.jsx";
 import AdminPanel from "./Components/Admin/AdminPanel.jsx";

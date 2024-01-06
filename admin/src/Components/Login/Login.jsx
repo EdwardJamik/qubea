@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import {Button, message, Form, Input, Row} from "antd";
-import FingerprintJS from '@fingerprintjs/fingerprintjs';
+// import FingerprintJS from '@fingerprintjs/fingerprintjs';
 import './login.scss'
 import Logo from '../../Assets/image/logo.svg'
 import {useCookies} from "react-cookie";
@@ -24,47 +24,47 @@ const Login =  () => {
         password: "",
     });
 
-    useEffect(() => {
-        FingerprintJS.load()
-            .then(fp => fp.get())
-            .then(
-                result => {
-                    setSubscribeId(result.visitorId);
-                    setPushId(result.visitorId);
-                },
-                error => {
-                    console.error('Error getting fingerprint:', error);
-                }
-            );
-    }, []);
+    // useEffect(() => {
+    //     FingerprintJS.load()
+    //         .then(fp => fp.get())
+    //         .then(
+    //             result => {
+    //                 setSubscribeId(result.visitorId);
+    //                 setPushId(result.visitorId);
+    //             },
+    //             error => {
+    //                 console.error('Error getting fingerprint:', error);
+    //             }
+    //         );
+    // }, []);
 
 
-    const { getSubscription } = useSubscribe({publicKey: PUBLIC_KEY});
-
-    const onSubmitSubscribe = useCallback(async (e) => {
-        e.preventDefault();
-        setLoadingSubscribe(true)
-        try {
-            // Get the subscription object using the getSubscription function
-            const subscription = await getSubscription();
-
-            // Send the subscription object and ID to the server for registration
-            await axios.post(`${url}/api/v1/notification/subscribe`, {
-                subscription: subscription,
-                id: subscribeId
-            });
-
-            // Log a message in case of successful subscription
-            alert('Subscribe success')
-            console.log('Subscribe success');
-        } catch (e) {
-            // Log a warning in case of an error
-            console.warn(e);
-        } finally {
-            setLoadingSubscribe(false)
-        }
-    }, [getSubscription]);
-
+    // const { getSubscription } = useSubscribe({publicKey: PUBLIC_KEY});
+    //
+    // const onSubmitSubscribe = useCallback(async (e) => {
+    //     e.preventDefault();
+    //     setLoadingSubscribe(true)
+    //     try {
+    //         // Get the subscription object using the getSubscription function
+    //         const subscription = await getSubscription();
+    //
+    //         // Send the subscription object and ID to the server for registration
+    //         await axios.post(`${url}/api/v1/notification/subscribe`, {
+    //             subscription: subscription,
+    //             id: subscribeId
+    //         });
+    //
+    //         // Log a message in case of successful subscription
+    //         alert('Subscribe success')
+    //         console.log('Subscribe success');
+    //     } catch (e) {
+    //         // Log a warning in case of an error
+    //         console.warn(e);
+    //     } finally {
+    //         setLoadingSubscribe(false)
+    //     }
+    // }, [getSubscription]);
+    //
     const {username, password} = inputValue;
     const handleOnChange = (e) => {
         const {name, value} = e.target;

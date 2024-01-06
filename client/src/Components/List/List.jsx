@@ -12,31 +12,22 @@ const List = ({ onTitleChange }) => {
 
     useEffect(() => {
         const categoryList = async () => {
-            try {
-                if (category_id === undefined) {
-                    // const response = await fetch('http://адреса-вашого-api/endpoint');
-                    // const data = await response.json();
-                    // console.log(data);
-                    const { data } = await fetch(`${url}/api/v1/manager/categoryList`, {}, { withCredentials: true });
-                    console.log(data)
-                    setProducts([])
-                    setCategory([...data.category]);
-                } else {
-                    const { data } = await axios.post(
-                        `${url}/api/v1/manager/productSearch`,
-                        { id: category_id },
-                        { withCredentials: true }
-                    );
-                    if(product_id === undefined){
-                        onTitleChange(data.title);
-                    }
-
-                    setProducts([...data.product]);
+            if (category_id === undefined) {
+                const { data } = await axios.get(`${url}/api/v1/manager/categoryList`, {}, { withCredentials: true });
+                setProducts([])
+                setCategory([...data?.category]);
+            } else {
+                const { data } = await axios.post(
+                    `${url}/api/v1/manager/productSearch`,
+                    { id: category_id },
+                    { withCredentials: true }
+                );
+                if(product_id === undefined){
+                    onTitleChange(data?.title);
                 }
-            } catch (error) {
-                console.error('Помилка при отриманні даних з API', error);
-            }
 
+                setProducts([...data?.product]);
+            }
         };
         categoryList();
     }, [category_id, onTitleChange]);
@@ -44,7 +35,6 @@ const List = ({ onTitleChange }) => {
     const listAnimation = useSpring({
         position:`${category_id === undefined ? 'relative' : 'absolute'}`,
         top:'0',
-        // marginTop:`${category_id === undefined ? '0' : '155px'}`,
         width:'100%',
         transform: `translateX(${category_id ? '-120%' : '0%'})`,
         reset: true,
@@ -53,7 +43,6 @@ const List = ({ onTitleChange }) => {
     const contentCartAnimation = useSpring({
         position:`${category_id ? 'relative' : 'absolute'}`,
         top:'0',
-        // marginTop:`${category_id === undefined ? '155px' : '0'}`,
         transform: `translateX(${category_id ? '0%' : '100%'})`,
         width:'100%',
         reset: true,

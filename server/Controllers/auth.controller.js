@@ -26,7 +26,6 @@ module.exports.Signup = async (req, res, next) => {
 module.exports.Login = async (req, res, next) => {
     try {
         const { username, password } = req.body;
-
         if(!username || !password ){
             return res.json({message:'Fill in all fields'})
         }
@@ -39,6 +38,8 @@ module.exports.Login = async (req, res, next) => {
             return res.json({message:'Invalid username or password' })
         }
         const token = createSecretToken(user._id);
+
+        console.log(token)
 
         res.cookie("token", token, {
             withCredentials: true,

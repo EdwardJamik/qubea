@@ -1,6 +1,6 @@
 import './App.scss'
-import {lazy, Suspense} from "react";
-import {Route, Routes, useNavigate, useParams} from "react-router-dom";
+import {Suspense} from "react";
+import {Route, Routes} from "react-router-dom";
 
 import Header from "./Components/header/Header.jsx";
 import Main from "./Components/Main/Main.jsx";
@@ -9,9 +9,6 @@ import Footer from "./Components/Footer/Footer.jsx";
 import PageLoader from "./Components/Loader/PageLoader.jsx";
 
 function App() {
-
-  const navigate = useNavigate();
-  const { category_id } = useParams();
 
   const routes = [
     {
@@ -27,6 +24,7 @@ function App() {
       element: (<><Header/><Main/><Footer/></>),
     },
   ]
+
 
   return (
       <Routes>

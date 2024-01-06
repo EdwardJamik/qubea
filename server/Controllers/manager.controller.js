@@ -26,13 +26,21 @@ module.exports.createCategory = async (req, res, next) => {
 
         const {title,image} = req.body
 
-        const createProductCategory = await Category.insertMany({title,image})
+        const listCategory = await Category.find({})
 
-        if(createProductCategory[0]?._id){
-            return res.json({success:true,message:'Category successfully created'})
+        if(listCategory.length <= 5){
+            const createProductCategory = await Category.insertMany({title,image})
+
+            if(createProductCategory[0]?._id){
+                return res.json({success:true,message:'Category successfully created'})
+            } else{
+                return res.json({success:false,message:'Error creating a category'})
+            }
         } else{
-            return res.json({success:false,message:'Error creating a category'})
+            return res.json({success:false,message:'Maximum available number of categories -> 6'})
         }
+
+
     } catch (e){
         console.error(e)
     }
@@ -230,13 +238,20 @@ module.exports.createProduct = async (req, res, next) => {
     try {
         const {title, description, options, image, category} = req.body
 
-        const createProduct = await Product.insertMany({title, description, options, image, category})
+        const listCategory = await Product.find({})
 
-        if(createProduct[0]?._id){
-            return res.json({success:true,message:'Product successfully created'})
-        } else{
-            return res.json({success:false,message:'Error creating a product'})
+        if(listCategory.length <= 5) {
+            const createProduct = await Product.insertMany({title, description, options, image, category})
+
+            if (createProduct[0]?._id) {
+                return res.json({success: true, message: 'Product successfully created'})
+            } else {
+                return res.json({success: false, message: 'Error creating a product'})
+            }
+        }else{
+            return res.json({success: false, message: 'Maximum available number of product -> 6'})
         }
+
     } catch (e){
         console.error(e)
     }
