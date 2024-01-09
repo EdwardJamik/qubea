@@ -15,8 +15,6 @@ module.exports.Subscribe = async (req, res, next) => {
 
         const {subscription, id} = req.body;
 
-        console.log(subscription)
-        console.log(id)
         subscriptions[id] = subscription;
         return res.status(201).json({data: {success: true}});
 

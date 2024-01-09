@@ -1,0 +1,113 @@
+[{
+  "errorCode": 0,
+  "message": "Category successfully created"
+},
+{
+"errorCode": 1,
+"message": "Error creating a category"
+},
+  {
+    "errorCode": 2,
+    "message": "Maximum available number of categories -> 6"
+  },
+  {
+    "errorCode": 3,
+    "message": "Category successfully update"
+  },
+  {
+    "errorCode": 4,
+    "message": "Error update a category"
+  },
+  {
+    "errorCode": 5,
+    "message": "Category successfully delete"
+  },
+  {
+    "errorCode": 6,
+    "message": "Error delete a category"
+  },
+  {
+    "errorCode": 7,
+    "message": "Category successfully delete"
+  },
+  {
+    "errorCode": 8,
+    "message": "Error delete a category"
+  },
+  {
+    "errorCode": 9,
+    "message": "Setting successfully update"
+  },
+  {
+    "errorCode": 10,
+    "message": "The order has been canceled"
+  },
+  {
+    "errorCode": 11,
+    "message": "The order is accepted"
+  },
+  {
+    "errorCode": 12,
+    "message": "The order is finished"
+  },
+  {
+    "errorCode": 13,
+    "message": "Product successfully created"
+  },
+  {
+    "errorCode": 14,
+    "message": "Error creating a product"
+  },
+  {
+    "errorCode": 15,
+    "message": "Maximum available number of product -> 6"
+  },
+  {
+    "errorCode": 16,
+    "message": "Product successfully update"
+  },
+  {
+    "errorCode": 17,
+    "message": "Error update a category"
+  },
+  {
+    "errorCode": 18,
+    "message": "Repeat your order in {{time}} minutes"
+  },
+  {
+    "errorCode": 19,
+    "message": "Repeat your order in {{time}} seconds"
+  },
+  {
+    "errorCode": 20,
+    "message": "User logged in successfully"
+  },
+  {
+    "errorCode": 21,
+    "message": "User is successfully authorized"
+  },
+  {
+    "errorCode": 22,
+    "message": "Invalid username or password"
+  },
+  {
+    "errorCode": 23,
+    "message": "Invalid username or password"
+  },
+  {
+    "errorCode": 24,
+    "message": "Fill in all fields"
+  },
+  {
+    "errorCode": 25,
+    "message": "Password successfully changed"
+  },
+  {
+    "errorCode": 26,
+    "message": "Password must contain 8 or more than 8 characters"
+  },
+  {
+    "errorCode": 27,
+    "message": "Passwords do not match"
+  }
+]

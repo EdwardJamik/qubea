@@ -1,6 +1,6 @@
 const {createCategory, categoryList, removeCategory, changeCategory, productList, changeProduct, createProduct,
     productSearch, productItemSearch, createOrder, settingList, removeProduct, updateSetting, ordersList,
-    ordersHistoryList, declineOrder, acceptOrder, endOrder
+    ordersHistoryList, declineOrder, acceptOrder, endOrder, updatePassword
 } = require("../Controllers/manager.controller");
 const router = require("express").Router();
 

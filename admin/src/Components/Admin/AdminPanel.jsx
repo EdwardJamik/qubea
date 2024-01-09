@@ -11,7 +11,6 @@ const AdminPanel = () => {
 
     useEffect(() => {
         const orderList = async () => {
-            console.log(isOrderStatus)
             if(isOrderStatus){
                 const {data} = await axios.get(
                     `${url}/api/v1/manager/ordersHistoryList`,

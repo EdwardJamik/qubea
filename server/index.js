@@ -14,8 +14,8 @@ const listen_port = PORT || 5000;
         app.listen(listen_port, () => console.log(`Server running on PORT : ${listen_port}`))
         // app.listen(8080, () => {
         // })
-        bot.launch(BOT_PORT, () => {
-            console.log(`Telegram bot is running on port ${BOT_PORT}`);
-        })
+        // bot.launch(BOT_PORT, () => {
+        //     console.log(`Telegram bot is running on port ${BOT_PORT}`);
+        // })
     }).catch(err => console.error(err))
 

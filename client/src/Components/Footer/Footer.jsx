@@ -22,7 +22,6 @@ const Footer = () => {
                 {},
                 {withCredentials: true}
             );
-            console.log(data)
             setWatch(data[0])
             setRules(data[1])
         }

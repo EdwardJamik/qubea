@@ -1,6 +1,13 @@
 const User = require("../Models/user.model");
 const { createSecretToken } = require("../util/SecretToken");
 const bcrypt = require("bcryptjs");
+const {updatePassword} = require("./manager.controller");
+const jsonData = require("../errorMessage.json");
+
+function getMessageByErrorCode(errorCode) {
+    const result = jsonData.find(item => item.errorCode === errorCode);
+    return result ? result.message : " ";
+}
 
 module.exports.Signup = async (req, res, next) => {
     try {
@@ -23,30 +30,48 @@ module.exports.Signup = async (req, res, next) => {
     }
 };
 
+module.exports.updatePassword = async (req, res, next) => {
+    try {
+        const { isPassword } = req.body;
+
+        if(isPassword.password !== isPassword.repeatPassword){
+            return res.json({ message: getMessageByErrorCode(27), success: false });
+        }
+
+        if(isPassword.password.length < 7){
+            return res.json({ message: getMessageByErrorCode(26), success: false });
+        }
+        const newPassword = await bcrypt.hash(isPassword.password, 12);
+        const changePassword = await User.updateOne({ password:newPassword });
+
+        return res.json({ message: getMessageByErrorCode(25), success: true });
+    } catch (error) {
+        console.error(error);
+    }
+};
+
 module.exports.Login = async (req, res, next) => {
     try {
         const { username, password } = req.body;
         if(!username || !password ){
-            return res.json({message:'Fill in all fields'})
+            return res.json({message:getMessageByErrorCode(24)})
         }
         const user = await User.findOne({ username });
         if(!user){
-            return res.json({message:'Invalid username or password' })
+            return res.json({message:getMessageByErrorCode(23) })
         }
         const auth = await bcrypt.compare(password,user.password)
         if (!auth) {
-            return res.json({message:'Invalid username or password' })
+            return res.json({message:getMessageByErrorCode(22) })
         }
         const token = createSecretToken(user._id);
-
-        console.log(token)
 
         res.cookie("token", token, {
             withCredentials: true,
             httpOnly: false,
         });
 
-        res.status(201).json({ message: "User is successfully authorized", success: true });
+        res.status(201).json({ message: getMessageByErrorCode(21), success: true });
     } catch (error) {
         console.error(error);
     }
@@ -55,7 +80,7 @@ module.exports.Login = async (req, res, next) => {
 module.exports.Logout = async (req, res, next) => {
     try {
         res.clearCookie('token')
-        res.status(201).json({ message: "User logged in successfully", success: true });
+        res.status(201).json({ message: getMessageByErrorCode(20), success: true });
 
     } catch (error) {
         console.error(error);

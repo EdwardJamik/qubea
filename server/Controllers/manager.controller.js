@@ -6,6 +6,12 @@ const dayjs = require('dayjs');
 const utc = require('dayjs/plugin/utc');
 const timezone = require('dayjs/plugin/timezone');
 const bot = require("../bot");
+const jsonData = require("../errorMessage.json");
+
+function getMessageByErrorCode(errorCode) {
+    const result = jsonData.find(item => item.errorCode === errorCode);
+    return result ? result.message : " ";
+}
 
 module.exports.categoryList = async (req, res, next) => {
     try {
@@ -32,12 +38,12 @@ module.exports.createCategory = async (req, res, next) => {
             const createProductCategory = await Category.insertMany({title,image})
 
             if(createProductCategory[0]?._id){
-                return res.json({success:true,message:'Category successfully created'})
+                return res.json({success:true,message: getMessageByErrorCode(0)})
             } else{
-                return res.json({success:false,message:'Error creating a category'})
+                return res.json({success:false,message:getMessageByErrorCode(1)})
             }
         } else{
-            return res.json({success:false,message:'Maximum available number of categories -> 6'})
+            return res.json({success:false,message:getMessageByErrorCode(2)})
         }
 
 
@@ -54,9 +60,9 @@ module.exports.changeCategory = async (req, res, next) => {
         const updateProductCategory = await Category.updateOne({_id:_id},{title,image})
 
         if(updateProductCategory){
-            return res.json({success:true,message:'Category successfully update'})
+            return res.json({success:true,message:getMessageByErrorCode(3)})
         } else{
-            return res.json({success:false,message:'Error update a category'})
+            return res.json({success:false,message:getMessageByErrorCode(4)})
         }
     } catch (e){
         console.error(e)
@@ -71,9 +77,9 @@ module.exports.removeCategory = async (req, res, next) => {
         const categoryRemoved = await Category.deleteOne({_id})
 
         if(categoryRemoved){
-            return res.json({success:true,message:'Category successfully delete'})
+            return res.json({success:true,message:getMessageByErrorCode(5)})
         } else{
-            return res.json({success:false,message:'Error delete a category'})
+            return res.json({success:false,message:getMessageByErrorCode(6)})
         }
     } catch (e){
         console.error(e)
@@ -88,9 +94,9 @@ module.exports.removeProduct = async (req, res, next) => {
         const categoryRemoved = await Product.deleteOne({_id})
 
         if(categoryRemoved){
-            return res.json({success:true,message:'Category successfully delete'})
+            return res.json({success:true,message:getMessageByErrorCode(7)})
         } else{
-            return res.json({success:false,message:'Error delete a category'})
+            return res.json({success:false,message:getMessageByErrorCode(8)})
         }
     } catch (e){
         console.error(e)
@@ -170,7 +176,7 @@ module.exports.updateSetting = async (req, res, next) => {
             await Setting.updateOne({ _id: settings._id }, { $set: settings });
         }
 
-            return res.json({success:true,message:'Setting successfully update'})
+            return res.json({success:true,message:getMessageByErrorCode(9)})
     } catch (e){
         console.error(e)
     }
@@ -189,7 +195,7 @@ module.exports.declineOrder = async (req, res, next) => {
 
         await Order.updateOne({ _id }, {cancel:true});
 
-        return res.json({success:true,message:'The order has been canceled'})
+        return res.json({success:true,message:getMessageByErrorCode(10)})
     } catch (e){
         console.error(e)
     }
@@ -208,7 +214,7 @@ module.exports.acceptOrder = async (req, res, next) => {
 
         await Order.updateOne({ _id }, {accepting:true});
 
-        return res.json({success:true,message:'The order is accepted'})
+        return res.json({success:true,message:getMessageByErrorCode(11)})
     } catch (e){
         console.error(e)
     }
@@ -221,14 +227,12 @@ module.exports.endOrder = async (req, res, next) => {
 
         const {message_id} = await Order.findOne({_id},{message_id:1});
 
-        console.log(message_id)
-
         await bot.telegram.editMessageReplyMarkup('-1002100671707',message_id,0,{ inline_keyboard: [
                 [{ text: '✅', callback_data:`${_id}` }]
             ]})
         await Order.updateOne({ _id }, {waiting:true,success:true});
 
-        return res.json({success:true,message:'The order is finished'})
+        return res.json({success:true,message:getMessageByErrorCode(12)})
     } catch (e){
         console.error(e)
     }
@@ -238,18 +242,18 @@ module.exports.createProduct = async (req, res, next) => {
     try {
         const {title, description, options, image, category} = req.body
 
-        const listCategory = await Product.find({})
+        const listCategory = await Product.find({category:category})
 
         if(listCategory.length <= 5) {
             const createProduct = await Product.insertMany({title, description, options, image, category})
 
             if (createProduct[0]?._id) {
-                return res.json({success: true, message: 'Product successfully created'})
+                return res.json({success: true, message: getMessageByErrorCode(13)})
             } else {
-                return res.json({success: false, message: 'Error creating a product'})
+                return res.json({success: false, message: getMessageByErrorCode(14)})
             }
         }else{
-            return res.json({success: false, message: 'Maximum available number of product -> 6'})
+            return res.json({success: false, message: getMessageByErrorCode(15)})
         }
 
     } catch (e){
@@ -266,9 +270,9 @@ module.exports.changeProduct = async (req, res, next) => {
         const updateProductCategory = await Product.updateOne({_id:_id},{title,description,options,image})
 
         if(updateProductCategory){
-            return res.json({success:true,message:'Product successfully update'})
+            return res.json({success:true,message:getMessageByErrorCode(16)})
         } else{
-            return res.json({success:false,message:'Error update a category'})
+            return res.json({success:false,message:getMessageByErrorCode(17)})
         }
     } catch (e){
         console.error(e)
@@ -313,7 +317,10 @@ module.exports.createOrder = async (req, res, next) => {
     try {
         const {table, option, product, subscribeId} = req.body
 
-        const latestOrder = await Order.findOne({subscribeId:subscribeId}, { orderNumber: 1, _id: 0, createdAt:1}).sort({orderNumber:-1, createdAt: -1 });
+        const latestOrder = await Order.findOne({subscribeId:subscribeId}, {_id: 0, createdAt:1,orderNumber: 1}).sort({orderNumber:-1, createdAt: -1 });
+
+        const latestOrderNumber = await Order.findOne({}, {_id: 0, createdAt:1,orderNumber: 1}).sort({orderNumber:-1, createdAt: -1 });
+
 
         dayjs.extend(utc);
         dayjs.extend(timezone);
@@ -328,7 +335,7 @@ module.exports.createOrder = async (req, res, next) => {
         const convertedCurrentDateTime = currentDate.tz(targetTimeZone);
 
         if(convertedDateTime <= convertedCurrentDateTime.$d.getTime() || latestOrder === null){
-            const orderNumber  = latestOrder?.orderNumber > 0 ? Number(latestOrder?.orderNumber)+1:1;
+            const orderNumber  = latestOrderNumber?.orderNumber > 0 ? Number(latestOrderNumber?.orderNumber)+1:1;
             const createOrder = await Order.insertMany({orderNumber, table, option, product, subscribeId, createdAt:new Date()})
 
             if(createOrder[0]?._id){
@@ -359,10 +366,17 @@ module.exports.createOrder = async (req, res, next) => {
             const timestampInMinutes = Math.floor(lastTime / (1000 * 60));
             const timestampInSecond = Math.floor(lastTime / (1000));
 
+
+
             if(timestampInMinutes){
-                return res.json({success:false, message:`Repeat your order in ${timestampInMinutes} minutes`})
+                const eMessage = getMessageByErrorCode(18)
+                const modifiedMessage = eMessage.replace("{{time}}", timestampInMinutes);
+
+                return res.json({success:false, message:modifiedMessage})
             } else{
-                return res.json({success:false, message:`Repeat your order in ${timestampInSecond} seconds`})
+                const eMessage = getMessageByErrorCode(19)
+                const modifiedMessage = eMessage.replace("{{time}}", timestampInSecond);
+                return res.json({success:false, message:modifiedMessage})
             }
         }
 
@@ -370,3 +384,4 @@ module.exports.createOrder = async (req, res, next) => {
         console.error(e)
     }
 }
+
