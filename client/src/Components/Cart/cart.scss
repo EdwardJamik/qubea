@@ -8,11 +8,11 @@
 
     width: 100%;
     max-width: 302px;
-
+    //max-height: 544px;
     & .product {
       position: relative;
-      max-width: 302px;
-      max-height: 382px;
+      max-width: calc((104vh - 52px * 2) / 3);
+      max-height: calc((100vh + 34px * 2) / 3);
       height: 382px;
       width: 100%;
 
@@ -24,7 +24,7 @@
 
       & .content {
         position: relative;
-        height: 314px;
+        height: 100%;
 
         & .name {
           position: absolute;
@@ -53,10 +53,8 @@
         & img {
           position: absolute;
           top: 0;
-          bottom: 0;
 
           width: 100%;
-          height: 100%;
 
           object-fit: cover;
           object-position: top;
@@ -64,8 +62,10 @@
       }
 
       & .name {
-        position: relative;
-
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
         padding: 17px 25px;
 
         display: flex;
@@ -76,7 +76,7 @@
         font-style: normal;
         font-weight: 700;
         line-height: normal;
-
+        background: $white;
         color: $text_color;
 
         z-index: 9;
@@ -86,44 +86,47 @@
 
     & p{
       position: relative;
-      height: 290px;
+      max-height: calc((38.5vh + 68px) / 3);
       padding-top: 16px;
       font-family: Manrope, sans-serif;
-      font-size: 18px;
+      font-size: calc((4vw + 10px) / 4);
       font-style: normal;
       font-weight: 400;
       line-height: normal;
 
       overflow: hidden;
-      padding-bottom: 88px;
+      margin-bottom: 88px;
       color: $text_color_3;
 
-      & .orderButton{
-        position: absolute;
-
-        bottom: 0;
-
-        display: block;
-        color: $white;
-        border-radius: 7px;
-        width: 100%;
-        max-width: 301px;
-        height: 78px;
-
-        font-family: Manrope, serif;
-        font-size: 20px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: normal;
-        background: $button_color;
-
-        & svg{
-          margin-left: 15px;
-        }
-
+      @media screen and (max-width: 1200px) {
+        margin-bottom: 80px;
       }
+
     }
-    
+    & .orderButton{
+      position: absolute;
+
+      bottom: 0;
+
+      display: block;
+      color: $white;
+      border-radius: 7px;
+      width: 100%;
+      max-width: calc((104vh - 104px) / 3);
+      height: 70px;
+
+      font-family: Manrope, serif;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      background: $button_color;
+
+      & svg{
+        margin-left: 15px;
+      }
+
+    }
 
   }
 
@@ -209,7 +212,7 @@
             line-height: normal;
 
             color: $background_footer;
-
+            opacity: 1;
             border-radius: 7px;
             border: 1px solid $button_color;
 
@@ -232,9 +235,10 @@
 
 }
 
-.indicateTable{
+.indicateTable {
   padding: 30px 154px;
-  & .modal_title{
+
+  & .modal_title {
     color: $text_color;
 
     text-align: center;
@@ -265,13 +269,14 @@
     }
   }
 
-  & .keyboard{
+  & .keyboard {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 15px;
     padding: 40px 92px 55px;
-    & button{
+
+    & button {
       max-width: 80px;
       width: 100%;
       border-radius: 7px;
@@ -288,7 +293,7 @@
     }
   }
 
-  & .orderButton{
+  & .orderButton {
     display: block;
     margin: 0 auto;
     color: $white;
@@ -304,16 +309,16 @@
     line-height: normal;
     background: $button_color;
 
-    & svg{
+    & svg {
       margin-left: 15px;
     }
 
   }
 
-  &.successOrder{
+  &.successOrder {
     padding: 70px 144px;
 
-    & h2{
+    & h2 {
       text-align: center;
       color: $background_footer;
       font-family: Thesignature, serif;
@@ -324,7 +329,7 @@
       margin-bottom: 30px;
     }
 
-    & .notice{
+    & .notice {
       color: $text_color;
       font-family: Manrope, serif;
       font-size: 25px;

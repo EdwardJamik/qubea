@@ -30,7 +30,7 @@ const Footer = () => {
     }, [])
 
     return (
-        <footer style={category_id ? {zIndex:'999'} : {}}>
+        <footer style={category_id ? {zIndex:'9'} : {}}>
             <div className="container">
                 {category_id ? <button onClick={()=>goBack()} className='back_button'>Come back</button> : <></>}
                 <a href={isRules.link} rel='noopener noreferrer' target='_blank' className='button__read'>{isRules.title}</a>

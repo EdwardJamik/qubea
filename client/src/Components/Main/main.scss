@@ -1,18 +1,19 @@
 @import "../../Assets/styles/_color";
 
 main{
-  padding-top: 155px;
+  //margin-top: 155px;
   position: relative;
+  overflow: hidden;
   z-index: 99;
   & .container{
+    height: 100%;
     & h2{
-      position: fixed;
+      position: relative;
       left: 0;
       right: 0;
       width: 100%;
-      padding: 0 50px;
+      padding: 0 0;
       background: #fff;
-      top: 76px;
       z-index: 99;
       color: $background_footer;
       font-family: 'Thesignature', cursive;
@@ -20,13 +21,19 @@ main{
       line-height: 80px;
       font-style: normal;
       font-weight: 400;
+
+      @media screen and (max-width: 1200px) {
+        line-height:64px;
+        font-size: 76px;
+        height: 62px;
+      }
     }
 
     & .qubea__list{
 
       &-background{
         position: fixed;
-        bottom: 80px;
+        bottom: calc((26vh + 10px) / 2);
         right: 50px;
 
         color: $background_footer;
@@ -34,11 +41,12 @@ main{
         opacity: .2;
 
         font-family: 'Thesignature', cursive;
-        font-size: 400px;
+        font-size: calc((56vw + 66px) / 2);
         font-style: normal;
         font-weight: 400;
         line-height: normal;
-
+        max-width: calc((88vw + 66px) / 2);
+        max-height: calc((82vh - 66px) / 2);
         z-index: -1;
       }
     }
