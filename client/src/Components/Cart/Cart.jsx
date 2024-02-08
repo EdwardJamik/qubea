@@ -267,7 +267,7 @@ const Cart = ({onTitleProductChange}) => {
                         (
                             <>
                                 <h2>Thanks for choosing!</h2>
-                                <div className='notice'>The administrator will bring your drink within 10 minutes.</div>
+                                <div className='notice'>The administrator will bring your drink.</div>
                             </>
                         )
                     }

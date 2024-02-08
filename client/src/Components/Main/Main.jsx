@@ -47,7 +47,7 @@ const Main = () => {
         <>
             <main>
                 <div className="container">
-                    <h2>{isTitle}</h2>
+                    <h2></h2>
 
                     <div className="qubea__list">
                         <animated.div style={contentAnimation}>
@@ -58,7 +58,6 @@ const Main = () => {
                                 <Cart onTitleProductChange={handleChildValueChange}/>
                             ) : (<></>)}
                         </animated.div>
-                        <span className="qubea__list-background">drinks</span>
                     </div>
                 </div>
             </main>
